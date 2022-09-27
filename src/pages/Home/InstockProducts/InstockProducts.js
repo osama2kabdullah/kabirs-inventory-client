@@ -1,10 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import useLoadStocks from '../../../hooks/useLoadStocks';
 import ButtonMe from '../../shared/ButtonMe';
 
 const InstockProducts = () => {
     const [products, setProducts] = useLoadStocks('products.json');
-    console.log(products);
+    const navigate = useNavigate();
+    const btnclik = (id) => {
+        navigate('/manageproducts/'+id)
+    }
     return (
         <div className='m-12'>
             <h3 className='text-3xl text-center mb-12'>In stock products</h3>
@@ -22,7 +26,7 @@ const InstockProducts = () => {
                         Lorem ipsum dolor it amet consectetur adipisicing elit. Dignissimos.
                     </p>
                     <p className='font-bold mb-5'>supplier namne</p>
-                    <ButtonMe>Update this product</ButtonMe>
+                    <ButtonMe btn={()=>btnclik(product._id)}>Update this product</ButtonMe>
                 </div>
             </div>)
             }
