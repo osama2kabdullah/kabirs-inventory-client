@@ -5,7 +5,23 @@ const ManageStock = () => {
   const [products, setProducts] = useLoadStocks(
     "https://safe-garden-23742.herokuapp.com/inStocProducts"
   );
-  console.log(products);
+  
+  const deletProductBtn = id => {
+    const procced = window.confirm('are you sure you want to delete?');
+    if(procced){
+      fetch('http://localhost:5000/deleteProduct/'+id, {
+        method: 'DELETE'
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        if(data.acknowledged){
+          const rest = products.filter(product=>product._id !== id);
+          setProducts(rest);
+        }
+      }) 
+    }
+  }
+  
   return (
     <div className="m-12">
       <h1 className="text-3xl">Your Current Stocked Products</h1>
@@ -20,19 +36,19 @@ const ManageStock = () => {
         </thead>
         <tbody>
           {products.map((product, index) => (
-            <tr className="border">
+            <tr className="border" key={product._id}>
               <td className="p-3">{index + 1}</td>
               <td>{product.name}</td>
               <td className="">{product.age}</td>
               <td>
                 <svg
-                
+                onClick={()=>deletProductBtn(product._id)}
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-8 bg-red-300 p-2 h-8 rounded-full hover:bg-red-400 active:bg-red-300"
                 >
                   <path
                     strokeLinecap="round"
