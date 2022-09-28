@@ -4,7 +4,7 @@ import useLoadStocks from '../../../hooks/useLoadStocks';
 import ButtonMe from '../../shared/ButtonMe';
 
 const InstockProducts = () => {
-    const [products, setProducts] = useLoadStocks('products.json');
+    const [products, setProducts] = useLoadStocks('https://safe-garden-23742.herokuapp.com/inStocProducts');
     const navigate = useNavigate();
     const btnclik = (id) => {
         navigate('/manageproducts/'+id)
