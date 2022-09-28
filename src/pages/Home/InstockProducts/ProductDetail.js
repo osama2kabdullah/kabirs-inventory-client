@@ -13,9 +13,6 @@ const ProductDetail = () => {
   const age = products?.age;
   const [newAge, setNewAge] = useState();
 
-  console.log("new age", newAge);
-  console.log("age", age);
-
   const updateItems = { id: products?._id, age: newAge };
   if (newAge) {
     fetch("https://safe-garden-23742.herokuapp.com/updateProduct", {
