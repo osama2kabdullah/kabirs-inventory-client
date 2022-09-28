@@ -38,6 +38,16 @@ const ProductDetail = () => {
       setNewAge(minusAge);
     }
   };
+  
+  //add quantity
+  const  addQuantity = e => {
+    e.preventDefault();
+    const number = e.target.number.value;
+    if(number){
+        const newNumber = age + parseInt(number);
+        setNewAge(newNumber)
+    }
+  }
 
   return (
     <div className="flex mx-12 gap-5">
@@ -51,8 +61,16 @@ const ProductDetail = () => {
         </div>
         <ButtonMe btn={updateBtn}>Deleverd</ButtonMe>
         <p className="mt-12 text-2xl font-bold">
-          quantity: {products?.age} pis
+          quantity: {newAge ? newAge : products?.age} pis
         </p>
+        
+        <form onSubmit={addQuantity} className="border p-3 mt-8">
+            <h4 className="text-2xl">Store this product</h4>
+            <div>
+            <input className="border p-2" type="number" name="number" />
+            <ButtonMe>Add</ButtonMe>
+            </div>
+        </form>
       </div>
       <img
         className="w-3/6"
