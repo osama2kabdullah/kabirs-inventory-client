@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import {
+  useAuthState,
   useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firbase.init";
 import ButtonMe from "../shared/ButtonMe";
 import AltLogin from "./AltLogin";
@@ -40,6 +41,13 @@ const Login = () => {
     }
   };
 
+  const [loggedUser] = useAuthState(auth);
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  if (loggedUser) {
+    navigate(from, { replace: true });
+  }
+  
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="p-6 border w-2/6">
