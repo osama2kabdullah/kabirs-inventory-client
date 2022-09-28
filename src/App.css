@@ -16,3 +16,6 @@
   margin: 0 15px;
   text-align: center;
 }
+tr:nth-child(even) {
+  background-color: rgb(245, 245, 245);
+}

@@ -28,6 +28,9 @@ const InstockProducts = () => {
             </div>)
             }
             </div>
+            <div className='text-center mt-12'>
+                <ButtonMe btn={()=>navigate('/managestock')}>Manage Your stocks</ButtonMe>
+            </div>
         </div>
     );
 };

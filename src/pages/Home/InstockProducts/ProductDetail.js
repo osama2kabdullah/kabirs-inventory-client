@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useLoadStocks from "../../../hooks/useLoadStocks";
 import ButtonMe from "../../shared/ButtonMe";
 
 const ProductDetail = () => {
+  const navigate = useNavigate();
   const { productId } = useParams();
   const [products, setProducts] = useLoadStocks(
     `https://safe-garden-23742.herokuapp.com/inStocProduct/${productId}`
@@ -38,16 +39,16 @@ const ProductDetail = () => {
       setNewAge(minusAge);
     }
   };
-  
+
   //add quantity
-  const  addQuantity = e => {
+  const addQuantity = (e) => {
     e.preventDefault();
     const number = e.target.number.value;
-    if(number){
-        const newNumber = age + parseInt(number);
-        setNewAge(newNumber)
+    if (number) {
+      const newNumber = age + parseInt(number);
+      setNewAge(newNumber);
     }
-  }
+  };
 
   return (
     <div className="flex mx-12 gap-5">
@@ -63,14 +64,19 @@ const ProductDetail = () => {
         <p className="mt-12 text-2xl font-bold">
           quantity: {newAge ? newAge : products?.age} pis
         </p>
-        
+
         <form onSubmit={addQuantity} className="border p-3 mt-8">
-            <h4 className="text-2xl">Store this product</h4>
-            <div>
+          <h4 className="text-2xl">Store this product</h4>
+          <div>
             <input className="border p-2" type="number" name="number" />
             <ButtonMe>Add</ButtonMe>
-            </div>
+          </div>
         </form>
+        <div className="text-center mt-12">
+          <ButtonMe btn={() => navigate("/managestock")}>
+            Manage Your stocks
+          </ButtonMe>
+        </div>
       </div>
       <img
         className="w-3/6"
