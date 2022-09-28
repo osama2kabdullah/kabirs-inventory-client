@@ -8,9 +8,11 @@ const ManageStock = () => {
   );
 
   const deletProductBtn = (id) => {
+    console.log(products);
+    console.log(id);
     const procced = window.confirm("are you sure you want to delete?");
-    if (procced) {
-      fetch("http://localhost:5000/deleteProduct/" + id, {
+    if (procced && id) {
+      fetch("https://safe-garden-23742.herokuapp.com/deleteProduct/" + id, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -33,14 +35,14 @@ const ManageStock = () => {
     const description = e.target.description.value;
 
     const doc = {
-      balance: price,
+      balance: '$'+price,
       age: quantity,
       name,
       company: sellerName,
       about: description
     };
     // save data in db
-    fetch("http://localhost:5000/addNewProduct", {
+    fetch("https://safe-garden-23742.herokuapp.com/addNewProduct", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -72,13 +74,13 @@ const ManageStock = () => {
           </thead>
           <tbody>
             {products.map((product, index) => (
-              <tr className="border" key={product._id}>
+              <tr className="border" key={product?._id}>
                 <td className="p-3">{index + 1}</td>
                 <td>{product.name}</td>
                 <td className="">{product.age}</td>
                 <td>
                   <svg
-                    onClick={() => deletProductBtn(product._id)}
+                    onClick={() => deletProductBtn(product?._id)}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"

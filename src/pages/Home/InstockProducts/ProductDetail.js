@@ -10,7 +10,7 @@ const ProductDetail = () => {
     `https://safe-garden-23742.herokuapp.com/inStocProduct/${productId}`
   );
 
-  const age = products?.age;
+  const age = parseInt(products?.age);
   const [newAge, setNewAge] = useState();
 
   const updateItems = { id: products?._id, age: newAge };
@@ -42,8 +42,11 @@ const ProductDetail = () => {
     e.preventDefault();
     const number = e.target.number.value;
     if (number) {
-      const newNumber = age + parseInt(number);
-      setNewAge(newNumber);
+      if(newAge){
+        setNewAge(newAge + parseInt(number));
+      } else {
+        setNewAge(age + parseInt(number));
+      }
     }
   };
 
@@ -59,7 +62,7 @@ const ProductDetail = () => {
         </div>
         <ButtonMe btn={updateBtn}>Deleverd</ButtonMe>
         <p className="mt-12 text-2xl font-bold">
-          quantity: {newAge ? newAge : products?.age} pis
+          quantity: {newAge ? newAge : age} pis
         </p>
 
         <form onSubmit={addQuantity} className="border p-3 mt-8">

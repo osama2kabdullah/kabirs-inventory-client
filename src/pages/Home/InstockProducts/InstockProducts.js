@@ -15,7 +15,7 @@ const InstockProducts = () => {
 
       <div className="grid grid-cols-3 gap-4">
         {products.map((product) => (
-          <div key={product._id} className="border">
+          <div key={product?._id} className="border">
             <img
               className="w-full"
               src="https://betterstudio.com/wp-content/uploads/2019/05/1-1-instagram-1024x1024.jpg"
