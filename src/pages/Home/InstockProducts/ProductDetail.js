@@ -7,7 +7,7 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const { productId } = useParams();
   const [products, setProducts] = useLoadStocks(
-    `http://localhost:5000/manageproducts/${productId}`
+    `https://safe-garden-23742.herokuapp.com/manageproducts/${productId}`
   );
 
   const age = parseInt(products?.age);
