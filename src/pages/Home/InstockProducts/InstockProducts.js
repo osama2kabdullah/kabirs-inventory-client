@@ -12,12 +12,9 @@ const InstockProducts = () => {
     "https://safe-garden-23742.herokuapp.com/userData?email=" + user?.email
   );
 
-  console.log("user products", userProducts);
-
   const [products, setProducts] = useLoadStocks(
     "https://safe-garden-23742.herokuapp.com/inStocProducts"
   );
-  console.log("products", products);
   const navigate = useNavigate();
 
   return (
