@@ -45,7 +45,7 @@ const Register = () => {
   }
   
   useEffect(() => {
-    fetch("http://localhost:5000/login", {
+    fetch("https://safe-garden-23742.herokuapp.com/login", {
       method: "POST",
       headers: {
         "content-type": "application/json",

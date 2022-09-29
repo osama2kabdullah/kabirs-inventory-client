@@ -13,7 +13,7 @@ const ManageStock = () => {
   };
 
   const [products, setProducts] = useLoadStocks(
-    "http://localhost:5000/userData?email=" + user?.email,
+    "https://safe-garden-23742.herokuapp.com/userData?email=" + user?.email,
     headers
   );
 
