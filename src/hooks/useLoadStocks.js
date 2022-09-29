@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
-const useLoadStocks = (link) => {
+const useLoadStocks = (link, headers) => {
     const [products, setProducts] = useState([]);
     useEffect(()=> {
-        fetch(link)
+        fetch(link, {
+            headers
+        })
         .then(res=>res.json())
         .then(data=>setProducts(data))
-    },[link]);
+    },[link, headers]);
     return [products, setProducts];
 };
 

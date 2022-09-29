@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import auth from "../../firbase.init";
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
 const AltLogin = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-  console.log(user);
+  
+  useEffect(() => {
+    fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ email: user?.user.email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        localStorage.setItem('accees_token', data?.token);
+      });
+  }, [user?.user]);
+  
   return (
     <div className="text-center">
       <div class="or-container">

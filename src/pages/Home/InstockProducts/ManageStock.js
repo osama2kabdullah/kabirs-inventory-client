@@ -1,15 +1,20 @@
 import React from "react";
 import useLoadStocks from "../../../hooks/useLoadStocks";
 import ButtonMe from "../../shared/ButtonMe";
-import {useAuthState} from "react-firebase-hooks/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firbase.init";
 
 const ManageStock = () => {
   const [user] = useAuthState(auth);
   console.log(user.email);
-  
+
+  const headers = {
+    authorization: "Bearer " + localStorage.getItem("accees_token"),
+  };
+
   const [products, setProducts] = useLoadStocks(
-    "https://safe-garden-23742.herokuapp.com/userData?email="+user?.email
+    "http://localhost:5000/userData?email=" + user?.email,
+    headers
   );
 
   const deletProductBtn = (id) => {
@@ -39,11 +44,11 @@ const ManageStock = () => {
 
     const doc = {
       email: user.email,
-      balance: '$'+price,
+      balance: "$" + price,
       age: quantity,
       name,
       company: sellerName,
-      about: description
+      about: description,
     };
     // save data in db
     fetch("https://safe-garden-23742.herokuapp.com/addNewProduct", {
@@ -54,9 +59,9 @@ const ManageStock = () => {
       body: JSON.stringify(doc),
     })
       .then((res) => res.json())
-      .then((data) =>{
-        console.log(data.acknowledged)
-        if(data.acknowledged){
+      .then((data) => {
+        console.log(data.acknowledged);
+        if (data.acknowledged) {
           const newProducts = [...products, doc];
           setProducts(newProducts);
         }

@@ -8,8 +8,11 @@ import ButtonMe from "../../shared/ButtonMe";
 const InstockProducts = () => {
   const [user, loading] = useAuthState(auth);
 
+  const headers = {
+    authorization: "Bearer " + localStorage.getItem("accees_token"),
+  };
   const [userProducts, setUserProducts] = useLoadStocks(
-    "https://safe-garden-23742.herokuapp.com/userData?email=" + user?.email
+    "http://localhost:5000/userData?email=" + user?.email, headers
   );
 
   const [products, setProducts] = useLoadStocks(

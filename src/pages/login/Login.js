@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useAuthState,
   useSendPasswordResetEmail,
@@ -14,9 +14,23 @@ const Login = () => {
   const navigate = useNavigate();
   const [sendPasswordResetEmail, sending, Reseterror] =
     useSendPasswordResetEmail(auth);
-    
+
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+    
+  useEffect(() => {
+    fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ email: user?.user.email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        localStorage.setItem('accees_token', data?.token);
+      });
+  }, [user?.user]);
 
   const loginsubmit = (e) => {
     e.preventDefault();
@@ -24,6 +38,7 @@ const Login = () => {
     const password = e.target.password.value;
     signInWithEmailAndPassword(email, password);
   };
+
   const [email, setEmail] = useState("");
   const emailInput = (e) => {
     setEmail(e.target.value);
@@ -35,10 +50,10 @@ const Login = () => {
     }
     if (email) {
       sendPasswordResetEmail(email);
-      if(Reseterror){
-        toast('Faild to send reset email');
+      if (Reseterror) {
+        toast("Faild to send reset email");
       }
-      if(sending){
+      if (sending) {
         toast("Password Reset email sending");
       }
       setEmailNot("");
@@ -49,7 +64,7 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   if (loggedUser) {
-    navigate(from, { replace: true });
+    // navigate(from, { replace: true });
   }
 
   if (loading) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firbase.init";
 import ButtonMe from "../shared/ButtonMe";
@@ -12,7 +12,7 @@ import {
 
 const Register = () => {
   const navigate = useNavigate();
-  const [createUserWithEmailAndPassword, loading, createUserError] =
+  const [createUserWithEmailAndPassword, user, loading, createUserError] =
     useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updateError] = useUpdateProfile(auth);
   const [sendEmailVerification, varificationError] =
@@ -41,8 +41,22 @@ const Register = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   if (loggedUser) {
-    navigate(from, { replace: true });
+    // navigate(from, { replace: true });
   }
+  
+  useEffect(() => {
+    fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ email: user?.user.email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        localStorage.setItem('accees_token', data?.token);
+      });
+  }, [user?.user]);
 
   if (loading) {
     return (
