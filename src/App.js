@@ -8,6 +8,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/login/Register";
 import RequireAuth from "./pages/RequireAuth";
 import ManageStock from "./pages/Home/InstockProducts/ManageStock";
+import Blogs from "./pages/Blogs";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           </RequireAuth>
         }
         ></Route>
+        <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
       </Routes>

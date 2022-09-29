@@ -19,6 +19,7 @@ const Navbar = () => {
   return (
     <nav className="flex gap-5 items-center">
       <Link to="/">Home</Link>
+      <Link to="/blogs">Blogs</Link>
       {user ? (
         <ButtonMe btn={signoutBtn}>Logout</ButtonMe>
       ) : (
