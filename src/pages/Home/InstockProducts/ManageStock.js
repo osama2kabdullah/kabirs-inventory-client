@@ -1,15 +1,18 @@
 import React from "react";
 import useLoadStocks from "../../../hooks/useLoadStocks";
 import ButtonMe from "../../shared/ButtonMe";
+import {useAuthState} from "react-firebase-hooks/auth";
+import auth from "../../../firbase.init";
 
 const ManageStock = () => {
+  const [user] = useAuthState(auth);
+  console.log(user.email);
+  
   const [products, setProducts] = useLoadStocks(
-    "https://safe-garden-23742.herokuapp.com/inStocProducts"
+    "https://safe-garden-23742.herokuapp.com/userData?email="+user?.email
   );
 
   const deletProductBtn = (id) => {
-    console.log(products);
-    console.log(id);
     const procced = window.confirm("are you sure you want to delete?");
     if (procced && id) {
       fetch("https://safe-garden-23742.herokuapp.com/deleteProduct/" + id, {
@@ -35,6 +38,7 @@ const ManageStock = () => {
     const description = e.target.description.value;
 
     const doc = {
+      email: user.email,
       balance: '$'+price,
       age: quantity,
       name,
