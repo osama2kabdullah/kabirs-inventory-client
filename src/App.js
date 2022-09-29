@@ -9,6 +9,7 @@ import Register from "./pages/login/Register";
 import RequireAuth from "./pages/RequireAuth";
 import ManageStock from "./pages/Home/InstockProducts/ManageStock";
 import Blogs from "./pages/Blogs";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
+        <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
       </Routes>
       <Footer></Footer>
     </div>
