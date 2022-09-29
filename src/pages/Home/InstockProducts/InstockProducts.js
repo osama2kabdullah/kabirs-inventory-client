@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../../firbase.init";
@@ -6,7 +6,7 @@ import useLoadStocks from "../../../hooks/useLoadStocks";
 import ButtonMe from "../../shared/ButtonMe";
 
 const InstockProducts = () => {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   const [userProducts, setUserProducts] = useLoadStocks(
     "https://safe-garden-23742.herokuapp.com/userData?email=" + user?.email
@@ -15,8 +15,9 @@ const InstockProducts = () => {
   const [products, setProducts] = useLoadStocks(
     "https://safe-garden-23742.herokuapp.com/inStocProducts"
   );
+  
   const navigate = useNavigate();
-
+  
   return (
     <div className="m-12">
       <h3 className="text-3xl text-center mb-12">In stock products</h3>

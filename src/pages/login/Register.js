@@ -12,10 +12,10 @@ import {
 
 const Register = () => {
   const navigate = useNavigate();
-  const [createUserWithEmailAndPassword, user, loading, createUserError] =
+  const [createUserWithEmailAndPassword, loading, createUserError] =
     useCreateUserWithEmailAndPassword(auth);
-  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-  const [sendEmailVerification, sending, varificationError] =
+  const [updateProfile, updateError] = useUpdateProfile(auth);
+  const [sendEmailVerification, varificationError] =
     useSendEmailVerification(auth);
 
   const [wrongpass, setWrongpass] = useState(false);

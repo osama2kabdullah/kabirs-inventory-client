@@ -10,6 +10,8 @@ import RequireAuth from "./pages/RequireAuth";
 import ManageStock from "./pages/Home/InstockProducts/ManageStock";
 import Blogs from "./pages/Blogs";
 import NotFoundPage from "./pages/NotFoundPage";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -39,6 +41,7 @@ function App() {
         <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
       </Routes>
       <Footer></Footer>
+      <ToastContainer />
     </div>
   );
 }

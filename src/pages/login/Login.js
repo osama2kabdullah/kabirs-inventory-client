@@ -5,6 +5,7 @@ import {
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../firbase.init";
 import ButtonMe from "../shared/ButtonMe";
 import AltLogin from "./AltLogin";
@@ -13,7 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [sendPasswordResetEmail, sending, Reseterror] =
     useSendPasswordResetEmail(auth);
-  console.log(Reseterror?.message);
+    
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
@@ -34,6 +35,12 @@ const Login = () => {
     }
     if (email) {
       sendPasswordResetEmail(email);
+      if(Reseterror){
+        toast('Faild to send reset email');
+      }
+      if(sending){
+        toast("Password Reset email sending");
+      }
       setEmailNot("");
     }
   };
