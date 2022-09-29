@@ -3,6 +3,7 @@ import useLoadStocks from "../../../hooks/useLoadStocks";
 import ButtonMe from "../../shared/ButtonMe";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firbase.init";
+import HelmetMe from "../../shared/HelmetMe";
 
 const ManageStock = () => {
   const [user] = useAuthState(auth);
@@ -70,6 +71,7 @@ const ManageStock = () => {
 
   return (
     <div className="m-12 flex gap-12">
+      <HelmetMe>Manage Stock</HelmetMe>
       <div className="w-full">
         <h1 className="text-3xl">Your Current Stocked Products</h1>
         <table className="mt-5 w-full">

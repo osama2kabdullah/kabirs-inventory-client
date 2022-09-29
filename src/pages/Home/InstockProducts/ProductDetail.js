@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useLoadStocks from "../../../hooks/useLoadStocks";
 import ButtonMe from "../../shared/ButtonMe";
+import HelmetMe from "../../shared/HelmetMe";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
@@ -49,9 +50,11 @@ const ProductDetail = () => {
       }
     }
   };
-
   return (
     <div className="flex mx-12 gap-5">
+      {
+        products?.name && <HelmetMe>{products?.name}</HelmetMe>
+      }
       <div>
         <h2 className="text-4xl mb-8 font-bold">{products?.name}</h2>
         <p>{products?.about}</p>

@@ -1,8 +1,10 @@
 import React from "react";
+import HelmetMe from "./shared/HelmetMe";
 
 const Blogs = () => {
   return (
     <div className="m-12 grid gap-5">
+      <HelmetMe>Blogs</HelmetMe>
       <div>
         <h3 className="text-2xl">Difference between javascript and node.js</h3>
         <p>

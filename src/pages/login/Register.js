@@ -9,6 +9,7 @@ import {
   useSendEmailVerification,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
+import HelmetMe from "../shared/HelmetMe";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -81,6 +82,7 @@ const Register = () => {
   }
   return (
     <div className="h-auto py-8 flex justify-center items-center">
+      <HelmetMe>Register</HelmetMe>
       <div className="p-6 border w-2/6">
         <h2 className="text-2xl text-center">Register</h2>
         <form onSubmit={registersubmitBtn} className="grid gap-8 my-5">

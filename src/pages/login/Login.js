@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firbase.init";
 import ButtonMe from "../shared/ButtonMe";
+import HelmetMe from "../shared/HelmetMe";
 import AltLogin from "./AltLogin";
 
 const Login = () => {
@@ -70,6 +71,7 @@ const Login = () => {
   if (loading) {
     return (
       <div role="status" className="flex justify-center items-center h-[90vh]">
+        
         <svg
           class="inline mr-2 w-10 h-10 text-gray-800 animate-spin dark:text-gray-600 fill-white"
           viewBox="0 0 100 101"
@@ -90,6 +92,7 @@ const Login = () => {
   }
   return (
     <div className="h-auto my-8 flex justify-center items-center">
+      <HelmetMe>Login</HelmetMe>
       <div className="p-6 border w-2/6">
         <h2 className="text-2xl text-center">Login</h2>
         <form onSubmit={loginsubmit} className="grid gap-8 my-5">
