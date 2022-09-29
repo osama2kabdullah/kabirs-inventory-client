@@ -25,13 +25,13 @@ const InstockProducts = () => {
       <h3 className="text-3xl text-center mb-12">In stock products</h3>
       <div className="grid grid-cols-3 gap-4">
       {
-          userProducts?.length === 0 && 
+          (user && userProducts?.length) === 0 && 
           
           <p> </p>
           
         }
         {
-          userProducts?.length === 0 && 
+          (user && userProducts?.length) === 0 && 
           
           <p>You dont have any products yet <span onClick={()=>navigate("/managestock")} className="hover:underline text-sky-500 cursor-pointer">Add some products</span></p>
           
